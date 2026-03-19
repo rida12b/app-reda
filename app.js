@@ -240,9 +240,6 @@ function generatePDF(data) {
     checkbox('Autre', false);
   }
 
-  y += 4;
-  checkbox('Accepte la venue d\'un technicien pour diagnostic sur site', data.accepteVisite);
-
   y += 2;
   field('Urgence', data.urgence);
   field('Commentaires', data.commentaires);
@@ -250,6 +247,8 @@ function generatePDF(data) {
   // --- Section 4 ---
   title('4 — ACCORD DU PROSPECT');
   field('Décision', data.decision);
+  y += 2;
+  checkbox('Accepte la venue d\'un technicien pour diagnostic sur site', data.accepteVisite);
   field('Moyen de contact privilégié', data.moyenContact);
   field('Plages horaires préférées', data.plagesHoraires);
 
