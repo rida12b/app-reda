@@ -43,7 +43,6 @@ function collectData() {
     email: val('email'),
     autreContact: val('autreContact'),
     typeBien: radio('typeBien'),
-    natureTravaux: val('natureTravaux'),
     urgence: radio('urgence'),
     commentaires: val('commentaires'),
     decision: radio('decision'),
@@ -179,7 +178,6 @@ function generatePDF(data) {
   title('3 — BESOINS DE TRAVAUX');
   field('Type de bien', data.typeBien);
 
-  field('Nature des travaux', data.natureTravaux);
   field('Urgence', data.urgence);
   field('Commentaires', data.commentaires);
 
