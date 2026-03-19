@@ -30,6 +30,18 @@ function radio(name) {
   return checked.value;
 }
 
+/** Get all checked checkbox values, resolving "autre" */
+function checkboxes(name) {
+  const checked = [...form.querySelectorAll(`input[name="${name}"]:checked`)];
+  return checked.map((cb) => {
+    if (cb.value === 'autre') {
+      const extra = val(name + 'Autre');
+      return extra || 'Autre';
+    }
+    return cb.value;
+  });
+}
+
 /** Collect all form data into a structured object */
 function collectData() {
   return {
@@ -43,6 +55,8 @@ function collectData() {
     email: val('email'),
     autreContact: val('autreContact'),
     typeBien: radio('typeBien'),
+    natureTravaux: checkboxes('natureTravaux'),
+    accepteVisite: !!form.querySelector('input[name="accepteVisite"]:checked'),
     urgence: radio('urgence'),
     commentaires: val('commentaires'),
     decision: radio('decision'),
@@ -85,6 +99,16 @@ function showError(el, msg) {
 }
 
 // === PDF Generation ===
+
+const ALL_TRAVAUX = [
+  'Rénovation générale',
+  'Isolation',
+  'Toiture',
+  'Façade',
+  'Menuiseries',
+  'Aménagement intérieur',
+  'Adaptation vieillissement/handicap',
+];
 
 function generatePDF(data) {
   const { jsPDF } = window.jspdf;
@@ -142,6 +166,27 @@ function generatePDF(data) {
     }
   }
 
+  function checkbox(label, checked) {
+    checkPage(7);
+    const boxX = marginL + 4;
+    const boxY = y - 3;
+    const boxSize = 3.5;
+    doc.setDrawColor(80, 80, 80);
+    doc.setLineWidth(0.3);
+    doc.rect(boxX, boxY, boxSize, boxSize, 'S');
+    if (checked) {
+      doc.setLineWidth(0.5);
+      doc.setDrawColor(26, 86, 50);
+      doc.line(boxX + 0.7, boxY + 1.8, boxX + 1.4, boxY + 2.8);
+      doc.line(boxX + 1.4, boxY + 2.8, boxX + 2.8, boxY + 0.7);
+    }
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(0, 0, 0);
+    doc.text(label, boxX + boxSize + 3, y);
+    y += 5.5;
+  }
+
   // --- Header ---
   doc.setFontSize(9);
   doc.setFont('helvetica', 'italic');
@@ -178,6 +223,27 @@ function generatePDF(data) {
   title('3 — BESOINS DE TRAVAUX');
   field('Type de bien', data.typeBien);
 
+  checkPage(8);
+  doc.setFontSize(9);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Nature des travaux envisages :', marginL, y);
+  y += 6;
+
+  ALL_TRAVAUX.forEach((t) => {
+    checkbox(t, data.natureTravaux.includes(t));
+  });
+
+  const autresTravaux = data.natureTravaux.filter((t) => !ALL_TRAVAUX.includes(t));
+  if (autresTravaux.length > 0) {
+    checkbox('Autre : ' + autresTravaux.join(', '), true);
+  } else {
+    checkbox('Autre', false);
+  }
+
+  y += 4;
+  checkbox('Accepte la venue d\'un technicien pour diagnostic sur site', data.accepteVisite);
+
+  y += 2;
   field('Urgence', data.urgence);
   field('Commentaires', data.commentaires);
 
