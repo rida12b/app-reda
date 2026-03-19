@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a5632">
+  <meta name="description" content="Fiche de prospection digitale — Institut Énergétique du Patrimoine">
+  <title>Fiche de Prospection</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Institut Énergétique du Patrimoine</h1>
+    <p class="subtitle">Fiche de Prospection</p>
+  </header>
+
+  <main>
+    <form id="prospection-form" novalidate>
+
+      <!-- Section 1 — Identification de l'apporteur -->
+      <fieldset>
+        <legend>1 — Identification de l'apporteur</legend>
+
+        <label for="date-prospection">Date de prospection <span class="required">*</span></label>
+        <input type="date" id="date-prospection" name="dateProspection" required>
+
+        <label>Mode de prospection</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="modeProspection" value="Porte-à-porte"> Porte-à-porte
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="modeProspection" value="Recommandation/réseau"> Recommandation / réseau
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="modeProspection" value="autre"> Autre :
+            <input type="text" name="modeProspectionAutre" class="inline-input" placeholder="Précisez…">
+          </label>
+        </div>
+
+        <label for="zone-secteur">Zone / Secteur</label>
+        <input type="text" id="zone-secteur" name="zoneSecteur" placeholder="Ex: Paris 15e, Boulogne…">
+      </fieldset>
+
+      <!-- Section 2 — Identification du prospect -->
+      <fieldset>
+        <legend>2 — Identification du prospect</legend>
+
+        <label for="nom-prenom">Nom / Prénom <span class="required">*</span></label>
+        <input type="text" id="nom-prenom" name="nomPrenom" required placeholder="Nom et prénom du prospect">
+
+        <label>Qualité</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="qualite" value="Propriétaire"> Propriétaire
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="qualite" value="Locataire"> Locataire
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="qualite" value="Mandataire/représentant"> Mandataire / représentant
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="qualite" value="autre"> Autre :
+            <input type="text" name="qualiteAutre" class="inline-input" placeholder="Précisez…">
+          </label>
+        </div>
+
+        <label for="adresse">Adresse du bien</label>
+        <textarea id="adresse" name="adresse" rows="2" placeholder="Adresse complète du bien concerné"></textarea>
+
+        <label for="telephone">Téléphone</label>
+        <input type="tel" id="telephone" name="telephone" placeholder="06 12 34 56 78">
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="exemple@email.com">
+
+        <label for="autre-contact">Autre contact</label>
+        <input type="text" id="autre-contact" name="autreContact" placeholder="Contact alternatif…">
+      </fieldset>
+
+      <!-- Section 3 — Besoins de travaux -->
+      <fieldset>
+        <legend>3 — Besoins de travaux</legend>
+
+        <label>Type de bien</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="typeBien" value="Maison individuelle"> Maison individuelle
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="typeBien" value="Appartement"> Appartement
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="typeBien" value="Immeuble/local professionnel"> Immeuble / local professionnel
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="typeBien" value="autre"> Autre :
+            <input type="text" name="typeBienAutre" class="inline-input" placeholder="Précisez…">
+          </label>
+        </div>
+
+        <label>Nature des travaux</label>
+        <div class="checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" name="natureTravaux" value="Rénovation générale"> Rénovation générale
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="natureTravaux" value="Isolation"> Isolation
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="natureTravaux" value="Toiture"> Toiture
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="natureTravaux" value="Façade"> Façade
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="natureTravaux" value="Menuiseries"> Menuiseries
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="natureTravaux" value="Aménagement intérieur"> Aménagement intérieur
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="natureTravaux" value="Adaptation vieillissement/handicap"> Adaptation vieillissement / handicap
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="natureTravaux" value="autre"> Autre :
+            <input type="text" name="natureTravauxAutre" class="inline-input" placeholder="Précisez…">
+          </label>
+        </div>
+
+        <label>Urgence</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="urgence" value="Très urgent (< 3 mois)"> Très urgent (&lt; 3 mois)
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="urgence" value="Court terme (3-6 mois)"> Court terme (3-6 mois)
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="urgence" value="Plus tard"> Plus tard
+          </label>
+        </div>
+
+        <label for="commentaires">Commentaires</label>
+        <textarea id="commentaires" name="commentaires" rows="3" placeholder="Détails supplémentaires sur les travaux…"></textarea>
+      </fieldset>
+
+      <!-- Section 4 — Accord du prospect -->
+      <fieldset>
+        <legend>4 — Accord du prospect</legend>
+
+        <label>Décision</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="decision" value="Accepté recontact"> Accepté — recontact autorisé
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="decision" value="Refusé"> Refusé
+          </label>
+        </div>
+
+        <label>Moyen de contact privilégié</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="moyenContact" value="Téléphone"> Téléphone
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="moyenContact" value="Email"> Email
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="moyenContact" value="autre"> Sans préférence / autre :
+            <input type="text" name="moyenContactAutre" class="inline-input" placeholder="Précisez…">
+          </label>
+        </div>
+
+        <label for="plages-horaires">Plages horaires préférées</label>
+        <input type="text" id="plages-horaires" name="plagesHoraires" placeholder="Ex: matin, après 18h…">
+      </fieldset>
+
+      <!-- Section 5 — Observations -->
+      <fieldset>
+        <legend>5 — Observations</legend>
+        <label for="observations">Notes et observations</label>
+        <textarea id="observations" name="observations" rows="4" placeholder="Observations libres…"></textarea>
+      </fieldset>
+
+    </form>
+  </main>
+
+  <div class="sticky-bottom">
+    <button type="button" id="btn-reset" class="btn btn-secondary">Effacer</button>
+    <button type="button" id="btn-pdf" class="btn btn-primary">Générer PDF</button>
+  </div>
+
+  <script src="jspdf.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
